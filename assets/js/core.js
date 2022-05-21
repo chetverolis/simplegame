@@ -3,6 +3,7 @@ const flasks = document.querySelectorAll('div.flask'),
     hidden_flasks = document.querySelectorAll('div.hidden_flask');
 
 let ball = null,
+    ball_max = 3,
     b_color = null,
     b_color_active = null,
     click_check = 0;
@@ -110,7 +111,7 @@ for (let flask of flasks) {
                 b_color_active = ball.getAttribute('b_color');
                 flask.children[0].classList.add('active_ball');
                 flask.children[0].style.position = 'absolute';
-                flask.children[0].style.bottom = `${flask.children[0].clientHeight * 3 + 12}px`;
+                flask.children[0].style.bottom = `${flask.children[0].clientHeight * ball_max + (ball_max * 4)}px`;
                 click_check = 1;
             }
         } else {
@@ -124,6 +125,10 @@ for (let flask of flasks) {
                 setTimeout(function() {
                     flask.children[0].style.bottom = `${(flask.children[0].clientHeight * (flask.children.length - 1)) + ((flask.children.length - 1) * 4)}px`;
                 }, 300)
+                setTimeout(function() {
+                    flask.children[0].style.position = null;
+                    flask.children[0].style.bottom = null;
+                }, 600)
                 ball.classList.remove('active_ball');
                 ball = null,
                 b_color = null,
@@ -132,13 +137,17 @@ for (let flask of flasks) {
             } else {
                 // Иначе возвращаем обратно в его колбу
                 ball = document.querySelector('div.active_ball');
-                ball.classList.remove('active_ball');
-                ball.style.position = null;
-                ball.style.bottom = null;
-                ball = null,
-                b_color = null,
-                b_color_active = null;
-                click_check = 0;
+                ball.style.position = 'absolute';
+                ball.style.bottom = `${ball.clientHeight * (ball.parentNode.children.length - 1) + ((ball.parentNode.children.length - 1) * 4)}px`;
+                setTimeout(function() {
+                    ball.style.position = null;
+                    ball.style.bottom = null;
+                    ball.classList.remove('active_ball');
+                    ball = null,
+                    b_color = null,
+                    b_color_active = null;
+                    click_check = 0;
+                }, 300)
             }
         }
         win();
