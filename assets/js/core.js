@@ -4,6 +4,10 @@ const flasks = document.querySelectorAll('div.flask'),
 
 let ball = null,
     ball_max = 3,
+    ball_numForWin = ball_max * (flasks.length - 2),
+    movement_points = 0,
+    movement_points_max = 10,
+    movement_check = 0,
     b_color = null,
     b_color_active = null,
     click_check = 0;
@@ -36,6 +40,19 @@ let colors_check = [
     0
 ]
 
+let level = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+let movement_layer_1 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+    movement_layer_2 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+    movement_layer_3 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+    movement_layer_4 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+    movement_layer_5 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+    movement_layer_6 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+    movement_layer_7 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+    movement_layer_8 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+    movement_layer_9 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+    movement_layer_10 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+
 // Генерируем уровень
 function generateLvl() {
     for (let i = 0; i < (flasks.length - 2); i++) {
@@ -66,7 +83,272 @@ function generateLvl() {
     }
 };
 
+// Сохраняем сгенерируемый уровень
+function saveLvl() {
+    // Сохраняем уровень в массиве
+    for (let i = 0; i < (flasks.length - 2); i++) {
+        for (let j = 0; j < ball_max; j++) {
+            level[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(level[i])
+        }
+    }
+
+    // Обрезаем строки в массиве
+    for (let i = 0; i < level.length; i++) {
+        level[i] = level[i].substring(0, 5);
+    }
+
+    // Проверка
+    // console.log('Level:');
+    // console.log(level);
+}
+
 generateLvl();
+saveLvl();
+
+function restartLvl() {
+    // Стираем уровень
+    for (let i = 0; i < flasks.length; i++) {
+        flasks[i].innerHTML = null;
+    }
+
+    // Возвращаем в исходное состояние
+    for (let i = 0; i < (flasks.length - 2); i++) {
+        for (let j = 0; j < ball_max; j++) {
+            // Создаём шар
+            let ball = document.createElement('div');
+            // Присваиваем id
+            ball.setAttribute('id', `ball_${(i + 1)+'_'+(j + 1)}`);
+            // Присваиваем class
+            ball.setAttribute('class', 'ball');
+            // Присваиваем цвет
+            let ball_color = level[i].split(',');
+            ball.setAttribute('b_color', `${ball_color[j]}`)
+            ball.style.backgroundColor = `${colors[ball_color[j]]}`;
+            // Втыкаем в колбу
+            flasks[i].prepend(ball);
+        }
+    }
+
+    win();
+}
+
+function move() {
+    if (movement_check == 0) {
+        if (movement_points == 0) {
+            movement_layer_6 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points == 1) {
+            movement_layer_7 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points == 2) {
+            movement_layer_8 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points == 3) {
+            movement_layer_9 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points == 4) {
+            movement_layer_10 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points == 5) {
+            movement_layer_1 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points == 6) {
+            movement_layer_2 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points == 7) {
+            movement_layer_3 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points == 8) {
+            movement_layer_4 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points == 9) {
+            movement_layer_5 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+        }
+        if (movement_points < movement_points_max) {
+            // Сохраняем ходы в массивах
+            if (movement_points == 0) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_1[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_1[i])
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_1[i] = String(movement_layer_1[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            } else if (movement_points == 1) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_2[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_2[i]);
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_2[i] = String(movement_layer_2[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            } else if (movement_points == 2) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_3[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_3[i]);
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_3[i] = String(movement_layer_3[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            } else if (movement_points == 3) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_4[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_4[i]);
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_4[i] = String(movement_layer_4[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            } else if (movement_points == 4) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_5[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_5[i]);
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_5[i] = String(movement_layer_5[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            } else if (movement_points == 5) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_6[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_6[i]);
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_6[i] = String(movement_layer_6[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            } else if (movement_points == 6) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_7[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_7[i]);
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_7[i] = String(movement_layer_7[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            } else if (movement_points == 7) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_8[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_8[i]);
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_8[i] = String(movement_layer_8[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            } else if (movement_points == 8) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_9[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_9[i]);
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_9[i] = String(movement_layer_9[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            } else if (movement_points == 9) {
+                for (let i = 0; i < flasks.length; i++) {
+                    for (let j = 0; j < ball_max; j++) {
+                        if (flasks[i].children[j]) {
+                            movement_layer_10[i] = String(flasks[i].children[j].getAttribute('b_color')) + ',' + String(movement_layer_10[i]);
+                        } else {
+                            // console.log('Nope >:D'+i);
+                            j += 1;
+                        }
+                    }
+                }
+
+                // Обрезаем строки в массиве
+                for (let i = 0; i < movement_layer_1.length; i++) {
+                    movement_layer_10[i] = String(movement_layer_10[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                }
+            }
+            movement_points += 1;
+            console.log('Ход: '+movement_points);
+            console.log (movement_layer_1);
+            console.log (movement_layer_2);
+            console.log (movement_layer_3);
+            console.log (movement_layer_4);
+            console.log (movement_layer_5);
+            console.log (movement_layer_6);
+            console.log (movement_layer_7);
+            console.log (movement_layer_8);
+            console.log (movement_layer_9);
+            console.log (movement_layer_10);
+        }
+        movement_check = 1;
+    }
+}
+
+function move_back() {
+    if (movement_points < movement_points_max) {
+
+    }
+}
 
 function win() {
     // Проверяем колбы на соответствие цветов, если цвета совпали, то заносим в массив 1
@@ -108,11 +390,13 @@ for (let flask of flasks) {
                 ball_check = typeof(active_ball) != "undefined" && active_ball !== null;
             if (ball_check != true) {
                 ball = flask.children[0];
-                b_color_active = ball.getAttribute('b_color');
-                flask.children[0].classList.add('active_ball');
-                flask.children[0].style.position = 'absolute';
-                flask.children[0].style.bottom = `${flask.children[0].clientHeight * ball_max + (ball_max * 4)}px`;
-                click_check = 1;
+                if (ball) {
+                    b_color_active = ball.getAttribute('b_color');
+                    flask.children[0].classList.add('active_ball');
+                    flask.children[0].style.position = 'absolute';
+                    flask.children[0].style.bottom = `${flask.children[0].clientHeight * ball_max + (ball_max * 4)}px`;
+                    click_check = 1;
+                }
             }
         } else {
             // Добавление шарика в колбу
@@ -134,6 +418,11 @@ for (let flask of flasks) {
                 b_color = null,
                 b_color_active = null;
                 click_check = 0;
+                move();
+                if (movement_points == 10) {
+                    movement_points = 0;
+                }
+                movement_check = 0;
             } else {
                 // Иначе возвращаем обратно в его колбу
                 ball = document.querySelector('div.active_ball');
