@@ -158,46 +158,40 @@ function restartLvl() {
     document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
 }
 
+// Ходы
 function move() {
+    // Смотрим за переключателем, дабы избежать двойного хода, т.к. при перемещении шара, приходится нажимать на колбу два раза
     if (movement_check == 0) {
+        // В зависимости от хода (movement_points), а их может быть максимум 5, стираем определенные массивы
         if (movement_points == 0) {
             movement_layer_5 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-            
         }
         if (movement_points == 1) {
             movement_layer_6 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-            
         }
         if (movement_points == 2) {
             movement_layer_7 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-            
         }
         if (movement_points == 3) {
             movement_layer_8 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-           
         }
         if (movement_points == 4) {
             movement_layer_9 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-            
         }
         if (movement_points == 5) {
             movement_layer_10 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
         }
         if (movement_points == 6) {
             movement_layer_1 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-            
         }
         if (movement_points == 7) {
             movement_layer_2 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-            
         }
         if (movement_points == 8) {
             movement_layer_3 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-            
         }
         if (movement_points == 9) {
             movement_layer_4 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-            
         }
         if (movement_points < movement_points_max) {
             // Сохраняем ходы в массивах
@@ -362,7 +356,9 @@ function move() {
                     movement_layer_10[i] = String(movement_layer_10[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
                 }
             }
+            // Прибавляем ход
             movement_points += 1;
+            // Проверка
             console.log('Ход: '+movement_points);
             console.log (movement_layer_1);
             console.log (movement_layer_2);
@@ -375,11 +371,14 @@ function move() {
             console.log (movement_layer_9);
             console.log (movement_layer_10);
         }
+        // Блокируем ход, чтобы избежать двойной прибавки
         movement_check = 1;
     }
 }
 
+// Ход назад
 function move_back() {
+    // Проверка на ходы, их не должно быть больше 5 и меньше 0
     if (current_move <= 5 && current_move > 0) {
         // Стираем уровень
         for (let i = 0; i < flasks.length; i++) {
@@ -397,6 +396,7 @@ function move_back() {
                 ball.setAttribute('class', 'ball');
                 // Присваиваем цвет
                 let ball_color;
+                // В зависимости от текущего положения хода, выбираем цвета из предыдущего
                 if (movement_points == 2) {
                     ball_color = movement_layer_1[i].split(',');
                 } else if (movement_points == 3) {
@@ -412,20 +412,22 @@ function move_back() {
                 } else if (movement_points == 8) {
                     ball_color = movement_layer_7[i].split(',');
                 } else if (movement_points == 9) {
-                    ball_color = movement_layer_9[i].split(',');
+                    ball_color = movement_layer_8[i].split(',');
                 } else if (movement_points == 10) {
                     ball_color = movement_layer_9[i].split(',');
                 } else if (movement_points == 1) {
+                    // Проверка на возврат к нулевому положению при условии, что мы ещё не достигли 10 хода
                     if (firstBack_check == 0) {
+                        // Цвета берем из изначально сгенерируемых
                         ball_color = level[i].split(',');
-                        if (movement_points == 10) {
-                            firstBack_check = 1;
-                        }
                     } else {
+                        // Цвета берем из предыдущего хода
                         ball_color = movement_layer_10[i].split(',');
                     }
                 }
+                // Цвет не может быть пустым и содержать значение: "100"
                 if (ball_color != '' && ball_color != '100') {
+                    // Если количество цветов (индексов) в массиве 1,2 и т.п., то берем только его(их) цвет, а дальше выходим из цикла через break
                     if (ball_color.length == 1) {
                         ball.setAttribute('b_color', `${ball_color[j]}`)
                         ball.style.backgroundColor = `${colors[ball_color[j]]}`;
@@ -445,19 +447,26 @@ function move_back() {
                     // Втыкаем в колбу
                     flasks[i].prepend(ball);
                 } else {
-                    console.log('ходы кончились');
+                    // Проверка
+                    console.log('Ходы кончились');
                 }
             }
         }
-
+        // Уменьшаем ход
         movement_points -= 1;
+        if (firstBack_check == 1) {
+            if (movement_points == 0) {
+                movement_points = 10;
+            }
+        }
         if (current_move >= 0) {
             current_move -= 1;
             console.log('current_move = '+current_move);
             document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
         }
+        // Проверка
         console.log('movement_points = '+movement_points)
-
+        // Прогоняем через функцию win(), чтобы сбросить определенные значения
         win();
     }
 }
@@ -538,6 +547,8 @@ for (let flask of flasks) {
                 move();
                 if (movement_points == 10) {
                     movement_points = 0;
+                    firstBack_check = 1;
+                    console.log('firstBack_check = '+firstBack_check);
                 }
                 movement_check = 0;
             } else {
