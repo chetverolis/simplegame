@@ -42,8 +42,10 @@ let colors_check = [
     0
 ]
 
+// Инициализация уровня
 let level = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
 
+// Инициализация ходов
 let movement_layer_1 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
     movement_layer_2 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
     movement_layer_3 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
@@ -55,6 +57,7 @@ let movement_layer_1 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
     movement_layer_9 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
     movement_layer_10 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
 
+// Победа
 function win() {
     // Проверяем колбы на соответствие цветов, если цвета совпали, то заносим в массив 1
     // Колбы
@@ -88,6 +91,7 @@ function win() {
     }
 }
 
+// Нажатие на колбу
 for (let flask of flasks) {
     flask.addEventListener('click', function() {
         if (click_check == 0) {
@@ -119,24 +123,31 @@ for (let flask of flasks) {
                     flask.children[0].style.position = null;
                     flask.children[0].style.bottom = null;
                 }, 600)
+                // Обнуляем все значения и очищаем активный класс
                 ball.classList.remove('active_ball');
                 ball = null,
                 b_color = null,
                 b_color_active = null;
                 click_check = 0;
+                // Обновляем кол-во доступных ходов на кнопке
                 if (current_move < 5) {
                     current_move += 1;
                     console.log('current_move = '+current_move);
                     document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
                 }
+                // Сбрасываем кол-во ходов до 0, чтобы перейти с 10 хода на 0, если дошли до 10 и ходим дальше
+                if (firstBack_check == 1 && movement_points == 10) {
+                    movement_points = 0
+                }
+                // Сохраняем ход
                 move();
+                // Если дошли до 10, активируем перемычку, чтобы на 0 худе при возврате хода, вернуться к 10
                 if (movement_points == 10) {
                     firstBack_check = 1;
+                    // Проверка
                     console.log('firstBack_check = '+firstBack_check);
                 }
-                if (firstBack_check == 1 && movement_points == 10) {
-                    // movement_points = 0 !!! ОШИБКА ИСПРАВИТЬ
-                }
+                // Обнуляем проверку хода (выключаем перемычку), чтобы избавиться от двойного действия
                 movement_check = 0;
             } else {
                 // Иначе возвращаем обратно в его колбу
@@ -144,6 +155,7 @@ for (let flask of flasks) {
                 ball.style.position = 'absolute';
                 ball.style.bottom = `${ball.clientHeight * (ball.parentNode.children.length - 1) + ((ball.parentNode.children.length - 1) * 4)}px`;
                 setTimeout(function() {
+                    // Обнуляем все значения и очищаем активный класс
                     ball.style.position = null;
                     ball.style.bottom = null;
                     ball.classList.remove('active_ball');
@@ -154,6 +166,7 @@ for (let flask of flasks) {
                 }, 300)
             }
         }
+        // Делаем проверку на победу
         win();
     })
 }
