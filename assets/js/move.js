@@ -55,7 +55,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_1.length; i++) {
-                    movement_layer_1[i] = String(movement_layer_1[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_1[i] = String(movement_layer_1[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             } else if (movement_points == 1) {
                 movement_layer_2 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -71,7 +71,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_2.length; i++) {
-                    movement_layer_2[i] = String(movement_layer_2[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_2[i] = String(movement_layer_2[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             } else if (movement_points == 2) {
                 movement_layer_3 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -87,7 +87,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_3.length; i++) {
-                    movement_layer_3[i] = String(movement_layer_3[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_3[i] = String(movement_layer_3[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             } else if (movement_points == 3) {
                 movement_layer_4 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -103,7 +103,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_4.length; i++) {
-                    movement_layer_4[i] = String(movement_layer_4[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_4[i] = String(movement_layer_4[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             } else if (movement_points == 4) {
                 movement_layer_5 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -119,7 +119,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_5.length; i++) {
-                    movement_layer_5[i] = String(movement_layer_5[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_5[i] = String(movement_layer_5[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             } else if (movement_points == 5) {
                 movement_layer_6 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -135,7 +135,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_6.length; i++) {
-                    movement_layer_6[i] = String(movement_layer_6[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_6[i] = String(movement_layer_6[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             } else if (movement_points == 6) {
                 movement_layer_7 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -151,7 +151,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_7.length; i++) {
-                    movement_layer_7[i] = String(movement_layer_7[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_7[i] = String(movement_layer_7[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             } else if (movement_points == 7) {
                 movement_layer_8 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -167,7 +167,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_8.length; i++) {
-                    movement_layer_8[i] = String(movement_layer_8[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_8[i] = String(movement_layer_8[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             } else if (movement_points == 8) {
                 movement_layer_9 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -183,7 +183,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_9.length; i++) {
-                    movement_layer_9[i] = String(movement_layer_9[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_9[i] = String(movement_layer_9[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             } else if (movement_points == 9) {
                 movement_layer_10 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -199,23 +199,23 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < movement_layer_10.length; i++) {
-                    movement_layer_10[i] = String(movement_layer_10[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+                    movement_layer_10[i] = String(movement_layer_10[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
                 }
             }
             // Прибавляем ход
             movement_points += 1;
             // Проверка
-            console.log('Ход: '+movement_points);
-            console.log (movement_layer_1);
-            console.log (movement_layer_2);
-            console.log (movement_layer_3);
-            console.log (movement_layer_4);
-            console.log (movement_layer_5);
-            console.log (movement_layer_6);
-            console.log (movement_layer_7);
-            console.log (movement_layer_8);
-            console.log (movement_layer_9);
-            console.log (movement_layer_10);
+            // console.log('Ход: '+movement_points);
+            // console.log (movement_layer_1);
+            // console.log (movement_layer_2);
+            // console.log (movement_layer_3);
+            // console.log (movement_layer_4);
+            // console.log (movement_layer_5);
+            // console.log (movement_layer_6);
+            // console.log (movement_layer_7);
+            // console.log (movement_layer_8);
+            // console.log (movement_layer_9);
+            // console.log (movement_layer_10);
         }
         // Блокируем ход, чтобы избежать двойной прибавки
         movement_check = 1;

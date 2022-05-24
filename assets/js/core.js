@@ -52,18 +52,44 @@ let movement_layer_1 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
 
 // Победа
 function win() {
+    // Инициализация победных чеков (перемычек), где 0 будет общим значением, а 1 и 2 означать false
+    let win_check_1 = 1,
+        win_check_2 = 2;
+
+    // Обнуляем массив с результатами проверок
+    collected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
     // Проверяем колбы на соответствие цветов, если цвета совпали, то заносим в массив 1
-    // Колбы
     for (let i = 0; i < flasks.length; i++) {
-        // Шары
-        for (let j = 0; j < flasks[i].children.length; j++) {
-            // Проверяем на наличие шаров и их кол-ва
-            if (flasks[i].children[j] && flasks[i].children.length == 3) {
-                // Если первый шар равен второму и первый равен третьему, то заносим 1
-                if (flasks[i].children[0].getAttribute('b_color') == flasks[i].children[1].getAttribute('b_color') && flasks[i].children[0].getAttribute('b_color') == flasks[i].children[2].getAttribute('b_color')) {
-                    collected[i] = 1;
+        for (let j = 0; j < ball_max; j++) {
+            // Делаем первую проверку, проверяем на наличие следующего шара
+            if (flasks[i].children[j + 1]) {
+                // Если он есть, сравниваем его и предыдущего шара
+                if (flasks[i].children[j + 1].getAttribute('b_color') == flasks[i].children[j].getAttribute('b_color')) {
+                    win_check_1 = 0;
+                } else {
+                    win_check_1 = 1;
                 }
             }
+            // Делаем вторую проверку, проверяем на соответствие первого и последнего шара
+            if (flasks[i].children.length == ball_max) {
+                if (flasks[i].firstChild.getAttribute('b_color') == flasks[i].lastChild.getAttribute('b_color') && win_check_1 == 0) {
+                    win_check_2 = 0;
+                } else {
+                    win_check_2 = 2;
+                }
+            } else {
+                // Если кол-во шаров не соответствует ball_max, то отключаем перемычку
+                win_check_2 = 2;
+            }
+        }
+        // Проверка чеков
+        // console.log(i+1+' колба win_check_1 = '+win_check_1);
+        // console.log(i+1+' колба win_check_2 = '+win_check_2);
+        
+        // Сравниваем две проверки и в случае соответствия, заносим в массив 1
+        if (win_check_1 == win_check_2) {
+            collected[i] = 1;
         }
     }
 
@@ -74,6 +100,9 @@ function win() {
     for (let i = 0; i < collected.length; i++) {
         collected_check += collected[i]
     }
+
+    // Проверка массива с результатами проверок
+    // console.log(collected);
 
     // Если игрок собрал все 9, то он победил
     if (collected_check == 9) {
