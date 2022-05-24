@@ -1,11 +1,15 @@
 // Генерируем уровень
 function generateLvl() {
+    for (let i = 0; i < flasks.length; i++) {
+        flasks[i].style.height = `${54 * ball_max}px`
+    }
+
     for (let i = 0; i < (flasks.length - 2); i++) {
-        for (let j = 0; j < 3; j++) {
+        for (let j = 0; j < ball_max; j++) {
             // Получаем случайное число от 0 до 8
             let rnd_num = Math.floor(Math.random() * 9);
             // Проверяем на кол-во существующих цветов
-            if (colors_check[rnd_num] < 3) {
+            if (colors_check[rnd_num] < ball_max) {
                 // Создаём шар
                 let ball = document.createElement('div');
                 // Присваиваем id
@@ -103,3 +107,24 @@ function restartLvl() {
 
     document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
 }
+
+// Изменение кол-ва шаров
+change_num_balls.addEventListener('click', function() {
+    // Сбрасываем текущий уровень
+    restartLvl();
+
+    // Стираем уровень
+    for (let i = 0; i < flasks.length; i++) {
+        flasks[i].innerHTML = null;
+    }
+
+    // Обнуляем чек цветов
+    colors_check = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    // Получаем новые значения
+    g_num_balls_value = document.querySelector('input#g_num_balls').value;
+    ball_max = g_num_balls_value;
+
+    // Генерируем новый уровень с новым кол-вом шаров
+    generateLvl();
+})

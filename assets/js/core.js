@@ -2,8 +2,11 @@
 const flasks = document.querySelectorAll('div.flask'),
     hidden_flasks = document.querySelectorAll('div.hidden_flask');
 
-let ball = null,
-    ball_max = 3,
+let change_num_balls = document.querySelector('button#change_num_balls'),
+    g_num_balls = document.querySelector('input#g_num_balls'),
+    g_num_balls_value = document.querySelector('input#g_num_balls').value,
+    ball = null,
+    ball_max = g_num_balls_value,
     ball_numForWin = ball_max * (flasks.length - 2),
     movement_points = 0,
     movement_points_max = 10,
@@ -30,17 +33,7 @@ const colors = [
 ]
 
 // Для проверки цвета
-let colors_check = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-]
+let colors_check = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 // Инициализация уровня
 let level = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
@@ -114,7 +107,7 @@ for (let flask of flasks) {
                 b_color = flask.children[0].getAttribute('b_color');
             }
             // Если шарик проходит проверку, то мы перекидываем его
-            if ((b_color_active == b_color && flask.children.length != 3) || flask.children.length == 0) {
+            if ((b_color_active == b_color && flask.children.length != ball_max) || flask.children.length == 0) {
                 flask.prepend(ball);
                 setTimeout(function() {
                     flask.children[0].style.bottom = `${(flask.children[0].clientHeight * (flask.children.length - 1)) + ((flask.children.length - 1) * 4)}px`;
