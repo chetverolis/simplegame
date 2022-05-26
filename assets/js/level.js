@@ -59,10 +59,22 @@ generateLvl();
 saveLvl();
 
 function restartLvl() {
-    // Стираем уровень
-    for (let i = 0; i < flasks.length; i++) {
-        flasks[i].innerHTML = null;
+    // Сохраняем текущую высоту колбы и стираем уровень
+    let flask_height = flasks[0].style.height;
+    g_body_wrapper.innerHTML = null;
+    
+    for (let i = 0; i < 11; i++) {
+        let flask = document.createElement('div');
+        // Присваиваем class
+        flask.setAttribute('class', 'flask');
+        // Присваиваем высоту
+        flask.style.height = `${flask_height}`;
+        // Втыкаем в wrapper
+        g_body_wrapper.append(flask);
     }
+
+    // Обновляем кол-во колб
+    flasks = document.querySelectorAll('div.flask');
 
     // Возвращаем в исходное состояние
     for (let i = 0; i < (flasks.length - 2); i++) {
@@ -82,20 +94,19 @@ function restartLvl() {
         }
     }
 
-    // Прогоняем через функцию win(), чтобы сбросить определенные значения
     win();
 
     // Обнуляем все ходы, приводим их к дефолтному значению
-    movement_layer_1 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    movement_layer_2 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    movement_layer_3 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    movement_layer_4 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    movement_layer_5 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    movement_layer_6 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    movement_layer_7 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    movement_layer_8 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    movement_layer_9 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    movement_layer_10 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+    movement_layer_1 = Array(flasks.length).fill(100);
+    movement_layer_2 = Array(flasks.length).fill(100);
+    movement_layer_3 = Array(flasks.length).fill(100);
+    movement_layer_4 = Array(flasks.length).fill(100);
+    movement_layer_5 = Array(flasks.length).fill(100);
+    movement_layer_6 = Array(flasks.length).fill(100);
+    movement_layer_7 = Array(flasks.length).fill(100);
+    movement_layer_8 = Array(flasks.length).fill(100);
+    movement_layer_9 = Array(flasks.length).fill(100);
+    movement_layer_10 = Array(flasks.length).fill(100);
 
     // Обнуляем все значения
     movement_points = 0,
@@ -105,6 +116,7 @@ function restartLvl() {
     click_check = 0,
     firstBack_check = 0;
 
+    // Обновляем число в кнопке
     document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
 }
 

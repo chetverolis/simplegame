@@ -1,6 +1,7 @@
 // Инициализация
-const flasks = document.querySelectorAll('div.flask'),
-    hidden_flasks = document.querySelectorAll('div.hidden_flask');
+let g_body = document.querySelector('div#g_body')
+    g_body_wrapper = g_body.children[1],
+    flasks = document.querySelectorAll('div.flask');
 
 let change_num_balls = document.querySelector('button#change_num_balls'),
     g_num_balls = document.querySelector('input#g_num_balls'),
@@ -39,16 +40,16 @@ let colors_check = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let level = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
 
 // Инициализация ходов
-let movement_layer_1 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
-    movement_layer_2 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
-    movement_layer_3 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
-    movement_layer_4 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
-    movement_layer_5 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
-    movement_layer_6 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
-    movement_layer_7 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
-    movement_layer_8 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
-    movement_layer_9 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
-    movement_layer_10 = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+let movement_layer_1 = Array(flasks.length).fill(100),
+    movement_layer_2 = Array(flasks.length).fill(100),
+    movement_layer_3 = Array(flasks.length).fill(100),
+    movement_layer_4 = Array(flasks.length).fill(100),
+    movement_layer_5 = Array(flasks.length).fill(100),
+    movement_layer_6 = Array(flasks.length).fill(100),
+    movement_layer_7 = Array(flasks.length).fill(100),
+    movement_layer_8 = Array(flasks.length).fill(100),
+    movement_layer_9 = Array(flasks.length).fill(100),
+    movement_layer_10 = Array(flasks.length).fill(100);
 
 // Победа
 function win() {
@@ -113,82 +114,115 @@ function win() {
     }
 }
 
-// Нажатие на колбу
-for (let flask of flasks) {
-    flask.addEventListener('click', function() {
-        if (click_check == 0) {
-            // Доставание шарика из колбы
-            let active_ball = document.querySelector('div.active_ball'),
-                ball_check = typeof(active_ball) != "undefined" && active_ball !== null;
-            if (ball_check != true) {
-                ball = flask.children[0];
-                if (ball) {
-                    b_color_active = ball.getAttribute('b_color');
-                    flask.children[0].classList.add('active_ball');
-                    flask.children[0].style.position = 'absolute';
-                    flask.children[0].style.bottom = `${flask.children[0].clientHeight * ball_max + (ball_max * 4)}px`;
-                    click_check = 1;
-                }
+// Нажатие на обычную колбу
+document.body.addEventListener('click', function(e) {
+    if (e.target.classList.contains('flask')) {
+        flask_click(e.target);
+    }
+    if (e.target.parentNode.classList.contains('flask')) {
+        flask_click(e.target.parentNode);
+    }
+})
+
+// Нажатие
+function flask_click(e) {
+    if (click_check == 0) {
+        // Доставание шарика из колбы
+        let active_ball = document.querySelector('div.active_ball'),
+            ball_check = typeof(active_ball) != "undefined" && active_ball !== null;
+        if (ball_check != true) {
+            ball = e.children[0];
+            if (ball) {
+                b_color_active = ball.getAttribute('b_color');
+                e.children[0].classList.add('active_ball');
+                e.children[0].style.position = 'absolute';
+                e.children[0].style.bottom = `${e.children[0].clientHeight * ball_max + (ball_max * 4)}px`;
+                click_check = 1;
             }
+        }
+    } else {
+        // Добавление шарика в колбу
+        if (e.children.length >= 1) {
+            b_color = e.children[0].getAttribute('b_color');
+        }
+        // Если шарик проходит проверку, то мы перекидываем его
+        if ((b_color_active == b_color && e.children.length != ball_max) || e.children.length == 0) {
+            e.prepend(ball);
+            setTimeout(function() {
+                e.children[0].style.bottom = `${(e.children[0].clientHeight * (e.children.length - 1)) + ((e.children.length - 1) * 4)}px`;
+            }, 300)
+            setTimeout(function() {
+                e.children[0].style.position = null;
+                e.children[0].style.bottom = null;
+            }, 600)
+            // Обнуляем все значения и очищаем активный класс
+            ball.classList.remove('active_ball');
+            ball = null,
+            b_color = null,
+            b_color_active = null;
+            click_check = 0;
+            // Обновляем кол-во доступных ходов на кнопке
+            if (current_move < 5) {
+                current_move += 1;
+                console.log('current_move = '+current_move);
+                document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
+            }
+            // Сбрасываем кол-во ходов до 0, чтобы перейти с 10 хода на 0, если дошли до 10 и ходим дальше
+            if (firstBack_check == 1 && movement_points == 10) {
+                movement_points = 0
+            }
+            // Сохраняем ход
+            move();
+            // Если дошли до 10, активируем перемычку, чтобы на 0 худе при возврате хода, вернуться к 10
+            if (movement_points == 10) {
+                firstBack_check = 1;
+                // Проверка
+                console.log('firstBack_check = '+firstBack_check);
+            }
+            // Обнуляем проверку хода (выключаем перемычку), чтобы избавиться от двойного действия
+            movement_check = 0;
         } else {
-            // Добавление шарика в колбу
-            if (flask.children.length >= 1) {
-                b_color = flask.children[0].getAttribute('b_color');
-            }
-            // Если шарик проходит проверку, то мы перекидываем его
-            if ((b_color_active == b_color && flask.children.length != ball_max) || flask.children.length == 0) {
-                flask.prepend(ball);
-                setTimeout(function() {
-                    flask.children[0].style.bottom = `${(flask.children[0].clientHeight * (flask.children.length - 1)) + ((flask.children.length - 1) * 4)}px`;
-                }, 300)
-                setTimeout(function() {
-                    flask.children[0].style.position = null;
-                    flask.children[0].style.bottom = null;
-                }, 600)
+            // Иначе возвращаем обратно в его колбу
+            ball = document.querySelector('div.active_ball');
+            ball.style.position = 'absolute';
+            ball.style.bottom = `${ball.clientHeight * (ball.parentNode.children.length - 1) + ((ball.parentNode.children.length - 1) * 4)}px`;
+            setTimeout(function() {
                 // Обнуляем все значения и очищаем активный класс
+                ball.style.position = null;
+                ball.style.bottom = null;
                 ball.classList.remove('active_ball');
                 ball = null,
                 b_color = null,
                 b_color_active = null;
                 click_check = 0;
-                // Обновляем кол-во доступных ходов на кнопке
-                if (current_move < 5) {
-                    current_move += 1;
-                    console.log('current_move = '+current_move);
-                    document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
-                }
-                // Сбрасываем кол-во ходов до 0, чтобы перейти с 10 хода на 0, если дошли до 10 и ходим дальше
-                if (firstBack_check == 1 && movement_points == 10) {
-                    movement_points = 0
-                }
-                // Сохраняем ход
-                move();
-                // Если дошли до 10, активируем перемычку, чтобы на 0 худе при возврате хода, вернуться к 10
-                if (movement_points == 10) {
-                    firstBack_check = 1;
-                    // Проверка
-                    console.log('firstBack_check = '+firstBack_check);
-                }
-                // Обнуляем проверку хода (выключаем перемычку), чтобы избавиться от двойного действия
-                movement_check = 0;
-            } else {
-                // Иначе возвращаем обратно в его колбу
-                ball = document.querySelector('div.active_ball');
-                ball.style.position = 'absolute';
-                ball.style.bottom = `${ball.clientHeight * (ball.parentNode.children.length - 1) + ((ball.parentNode.children.length - 1) * 4)}px`;
-                setTimeout(function() {
-                    // Обнуляем все значения и очищаем активный класс
-                    ball.style.position = null;
-                    ball.style.bottom = null;
-                    ball.classList.remove('active_ball');
-                    ball = null,
-                    b_color = null,
-                    b_color_active = null;
-                    click_check = 0;
-                }, 300)
-            }
+            }, 300)
         }
-        // Делаем проверку на победу
-        win();
-    })
+    }
+    // Делаем проверку на победу
+    win();
+}
+
+function flask_add() {
+    let flask = document.createElement('div');
+    // Присваиваем class
+    flask.setAttribute('class', 'flask');
+    // Присваиваем высоту
+    flask.style.height = `${flasks[0].style.height}`;
+    // Втыкаем в wrapper
+    g_body_wrapper.append(flask);
+    // Обновляем кол-во колб
+    flasks = document.querySelectorAll('div.flask');
+
+    // Обновляем массивы с сохр. ходами, добавляем пустой слот
+    level[flasks.length - 1] = '';
+    movement_layer_1[flasks.length - 1] = 100;
+    movement_layer_2[flasks.length - 1] = 100;
+    movement_layer_3[flasks.length - 1] = 100;
+    movement_layer_4[flasks.length - 1] = 100;
+    movement_layer_5[flasks.length - 1] = 100;
+    movement_layer_6[flasks.length - 1] = 100;
+    movement_layer_7[flasks.length - 1] = 100;
+    movement_layer_8[flasks.length - 1] = 100;
+    movement_layer_9[flasks.length - 1] = 100;
+    movement_layer_10[flasks.length - 1] = 100;
 }
