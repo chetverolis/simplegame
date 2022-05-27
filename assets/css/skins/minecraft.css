@@ -1,0 +1,121 @@
+#g_body {
+    background-image: url('../../../assets/img/skins/minecraft/background.jpg');
+    background-repeat: repeat;
+    background-size: 128px;
+}
+
+#g_body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background-image: url('../../../assets/img/skins/minecraft/grass.jpg');
+    background-repeat: repeat;
+    background-size: 100px;
+}
+
+/* Кнопки и поля */
+#g_body > .header > button {
+    background-color: #858585!important;
+    color: #fff!important;
+    border: 1px solid #000!important;
+}
+
+#g_body > .header > button::after {
+    border-bottom: 5px solid #595959!important;
+}
+
+#g_body > .header > button:hover {
+    background-color: #7e88bf!important;
+    color: #fff!important;
+    border: 1px solid #000!important;
+}
+
+#g_body > .header > button:hover::after {
+    border-bottom: 5px solid #5c669c!important;
+}
+
+#g_body > .header > input {
+    border: 1px solid #000!important;
+}
+
+#g_body > .header > input:hover {
+    outline: 2px solid #000!important;
+}
+
+#g_body > .header > input:focus-visible {
+    outline: 2px solid #000!important;
+}
+
+/* Колбы и шары*/
+#g_body > .wrapper > .flask {
+    border-radius: 0 0 0 0!important;
+    -webkit-border-radius: 0 0 0 0!important;
+    -moz-border-radius: 0 0 0 0!important;
+    -ms-border-radius: 0 0 0 0!important;
+    -o-border-radius: 0 0 0 0!important;
+}
+
+#g_body > .wrapper > .flask > .ball {
+    border-radius: 0px!important;
+    -webkit-border-radius: 0px!important;
+    -moz-border-radius: 0px!important;
+    -ms-border-radius: 0px!important;
+    -o-border-radius: 0px!important;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="0"] {
+    background-image: url('../../../assets/img/skins/minecraft/SpiderFace.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="1"] {
+    background-image: url('../../../assets/img/skins/minecraft/HumanFace.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="2"] {
+    background-image: url('../../../assets/img/skins/minecraft/ZombieFace.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="3"] {
+    background-image: url('../../../assets/img/skins/minecraft/Snowgolemhead.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="4"] {
+    background-image: url('../../../assets/img/skins/minecraft/EndermanFace.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="5"] {
+    background-image: url('../../../assets/img/skins/minecraft/CowFace.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="6"] {
+    background-image: url('../../../assets/img/skins/minecraft/PigFace.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="7"] {
+    background-image: url('../../../assets/img/skins/minecraft/SlimeFace.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="8"] {
+    background-image: url('../../../assets/img/skins/minecraft/SkeletonFace.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}

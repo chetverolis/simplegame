@@ -7,3 +7,30 @@
         background-position: calc(100% - 200px) calc(100% - 200px);
     }
 }
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px); 
+        -webkit-transform: translate(1px, 1px); 
+        -moz-transform: translate(1px, 1px); 
+        -ms-transform: translate(1px, 1px); 
+        -o-transform: translate(1px, 1px); 
+    }
+    33% { transform: translate(-1px, -2px);
+        -webkit-transform: translate(-1px, -2px);
+        -moz-transform: translate(-1px, -2px);
+        -ms-transform: translate(-1px, -2px);
+        -o-transform: translate(-1px, -2px);
+    }
+    66% { transform: translate(1px, -1px); 
+        -webkit-transform: translate(1px, -1px);
+        -moz-transform: translate(1px, -1px);
+        -ms-transform: translate(1px, -1px);
+        -o-transform: translate(1px, -1px);
+    }
+    100% { transform: translate(-1px, 2px);
+        -webkit-transform: translate(-1px, 2px);
+        -moz-transform: translate(-1px, 2px);
+        -ms-transform: translate(-1px, 2px);
+        -o-transform: translate(-1px, 2px);
+    }
+}

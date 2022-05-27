@@ -119,6 +119,15 @@ function restartLvl() {
 
     // Обновляем число в кнопке
     document.querySelector('button#move_back').innerHTML = `Ход назад (${current_move})`;
+
+    // Добавляем или убираем скролл
+    let g_body_wrapper_h = g_body_wrapper.clientHeight,
+    g_body_h = g_body.clientHeight;
+    if (g_body_wrapper_h > g_body_h) {
+        g_body.style.overflowY = 'scroll';
+    } else {
+        g_body.style.overflowY = 'hidden';
+    }
 }
 
 // Изменение кол-ва шаров
