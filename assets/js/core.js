@@ -70,29 +70,24 @@ function win() {
     // Обнуляем массив с результатами проверок
     collected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    // Проверяем на режим с одним шаром
-    for (let i = 0; i < flasks.length - (flasks.length - 9); i++) {
-        if (flasks[i].children && flasks[i].children.length == 1) {
-            one_ball_mode += 1;
-        }
+    // Делаем проверку на режим с одним шаром в колбе
+    if (flasks[0].children.length == 1 && flasks[1].children.length == 1 && flasks[2].children.length == 1 && flasks[3].children.length == 1 && flasks[4].children.length == 1 && flasks[5].children.length == 1 && flasks[6].children.length == 1 && flasks[7].children.length == 1) {
+        collected = Array(flasks.length).fill(1);
+        one_ball_mode = 1;
     }
 
-    if (one_ball_mode != 9) {
+    if (one_ball_mode == 0) {
         // Проверяем колбы на соответствие цветов, если цвета совпали, то заносим в массив 1
         for (let i = 0; i < flasks.length; i++) {
-            for (let j = 0; j < flasks[i].children.length; j++) {
-                if (flasks[i].children.length >= 1) {
-                    // Делаем первую проверку, проверяем на наличие следующего шара
-                    if (flasks[i].children[j + 1]) {
-                        // Если он есть, сравниваем его и предыдущего шара
-                        if (flasks[i].children[j + 1].getAttribute('b_color') == flasks[i].children[j].getAttribute('b_color')) {
-                            win_check_1 = 0;
-                        } else {
-                            win_check_1 = 1;
-                        }
+            for (let j = 0; j < ball_max; j++) {
+                // Делаем первую проверку, проверяем на наличие следующего шара
+                if (flasks[i].children[j + 1]) {
+                    // Если он есть, сравниваем его и предыдущего шара
+                    if (flasks[i].children[j + 1].getAttribute('b_color') == flasks[i].children[j].getAttribute('b_color')) {
+                        win_check_1 = 0;
+                    } else {
+                        win_check_1 = 1;
                     }
-                } else {
-                    win_check_1 = 1;
                 }
                 // Делаем вторую проверку, проверяем на соответствие первого и последнего шара
                 if (flasks[i].children.length == ball_max) {
@@ -106,18 +101,15 @@ function win() {
                     win_check_2 = 2;
                 }
             }
-
             // Проверка чеков
-            // console.log(i+1+' колба win_check_1 = '+win_check_1);
-            // console.log(i+1+' колба win_check_2 = '+win_check_2);
+            console.log(i+1+' колба win_check_1 = '+win_check_1);
+            console.log(i+1+' колба win_check_2 = '+win_check_2);
 
             // Сравниваем две проверки и в случае соответствия, заносим в массив 1
             if (win_check_1 == win_check_2) {
                 collected[i] = 1;
             }
         }
-    } else {
-        collected = Array(flasks.length).fill('1');
     }
 
     // Обнуляем проверку соответствия цветов
@@ -129,7 +121,7 @@ function win() {
     }
 
     // Проверка массива с результатами проверок
-    // console.log(collected);
+    console.log(collected);
 
     // Если игрок собрал все 9, то он победил
     if (collected_check >= 9) {
