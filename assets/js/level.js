@@ -47,7 +47,7 @@ function saveLvl() {
 
     // Обрезаем строки в массиве
     for (let i = 0; i < level.length; i++) {
-        level[i] = String(level[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, 5);
+        level[i] = String(level[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
     }
 
     // Проверка
@@ -109,15 +109,16 @@ function restartLvl() {
     movement_layer_10 = Array(flasks.length).fill(100);
 
     // Обнуляем все значения
-    movement_points = 0,
-    movement_points_max = 10,
-    current_move = 0,
-    movement_check = 0,
-    click_check = 0,
+    flask_add_num;
+    movement_points = 0;
+    movement_points_max = 10;
+    current_move = 0;
+    movement_check = 0;
+    click_check = 0;
     firstBack_check = 0;
 
     // Обновляем число в кнопке
-    document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
+    document.querySelector('button#move_back').innerHTML = `Ход назад (${current_move})`;
 }
 
 // Изменение кол-ва шаров
@@ -139,4 +140,5 @@ change_num_balls.addEventListener('click', function() {
 
     // Генерируем новый уровень с новым кол-вом шаров
     generateLvl();
+    saveLvl();
 })

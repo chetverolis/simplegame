@@ -1,0 +1,9 @@
+@keyframes background_move {
+    from {
+        background-position: 0% 0%;
+    }
+
+    to {
+        background-position: calc(100% - 200px) calc(100% - 200px);
+    }
+}

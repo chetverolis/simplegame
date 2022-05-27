@@ -89,7 +89,7 @@ function move() {
             movement_points += 1;
             // Проверка
             console.log('Ход: '+movement_points);
-            console.log (move_save(movement_layer_1));
+            console.log (movement_layer_1);
             console.log (movement_layer_2);
             console.log (movement_layer_3);
             console.log (movement_layer_4);
@@ -110,6 +110,7 @@ function move_back() {
     // Проверка на ходы, их не должно быть больше 5 и меньше 0
     if (current_move <= 5 && current_move > 0) {
         flasks = document.querySelectorAll('div.flask');
+
         // Стираем уровень
         for (let i = 0; i < flasks.length; i++) {
             flasks[i].innerHTML = null;
@@ -129,65 +130,48 @@ function move_back() {
                 // В зависимости от текущего положения хода, выбираем цвета из предыдущего
                 if (movement_points == 2) {
                     // ball_color - цвета всего стола на предыдущем ходу, после перехода, обнуляем текущий movement_layer_2
-                    ball_color = movement_layer_1[i].split(',');
+                    ball_color = String(movement_layer_1[i]).replace('100', '').split(',');
                     movement_layer_2 = Array(flasks.length).fill(100);;
                 } else if (movement_points == 3) {
-                    ball_color = movement_layer_2[i].split(',');
+                    ball_color = String(movement_layer_2[i]).replace('100', '').split(',');
                     movement_layer_3 = Array(flasks.length).fill(100);;
                 } else if (movement_points == 4) {
-                    ball_color = movement_layer_3[i].split(',');
+                    ball_color = String(movement_layer_3[i]).replace('100', '').split(',');
                     movement_layer_4 = Array(flasks.length).fill(100);;
                 } else if (movement_points == 5) {
-                    ball_color = movement_layer_4[i].split(',');
+                    ball_color = String(movement_layer_4[i]).replace('100', '').split(',');
                     movement_layer_5 = Array(flasks.length).fill(100);;
                 } else if (movement_points == 6) {
-                    ball_color = movement_layer_5[i].split(',');
+                    ball_color = String(movement_layer_5[i]).replace('100', '').split(',');
                     movement_layer_6 = Array(flasks.length).fill(100);;
                 } else if (movement_points == 7) {
-                    ball_color = movement_layer_6[i].split(',');
+                    ball_color = String(movement_layer_6[i]).replace('100', '').split(',');
                     movement_layer_7 = Array(flasks.length).fill(100);;
                 } else if (movement_points == 8) {
-                    ball_color = movement_layer_7[i].split(',');
+                    ball_color = String(movement_layer_7[i]).replace('100', '').split(',');
                     movement_layer_8 = Array(flasks.length).fill(100);;
                 } else if (movement_points == 9) {
-                    ball_color = movement_layer_8[i].split(',');
+                    ball_color = String(movement_layer_8[i]).replace('100', '').split(',');
                     movement_layer_9 = Array(flasks.length).fill(100);;
                 } else if (movement_points == 10) {
-                    ball_color = movement_layer_9[i].split(',');
+                    ball_color = String(movement_layer_9[i]).replace('100', '').split(',');
                     movement_layer_10 = Array(flasks.length).fill(100);;
                 } else if (movement_points == 1) {
                     // Проверка на возврат к нулевому положению при условии, что мы ещё не достигли 10 хода
                     if (firstBack_check == 0) {
                         // Цвета берем из изначально сгенерируемых
-                        ball_color = level[i].split(',');
+                        ball_color = String(level[i]).replace('100', '').split(',');
                     } else {
                         // Цвета берем из предыдущего хода
-                        ball_color = movement_layer_10[i].split(',');
+                        ball_color = String(movement_layer_10[i]).replace('100', '').split(',');
                     }
                 }
                 // Цвет не может быть пустым и содержать значение: "100"
-                if (ball_color != '' && ball_color != '100') {
-                    // Если количество цветов (индексов) в массиве 1,2 и т.п., то берем только его(их) цвет, а дальше выходим из цикла через break
-                    if (ball_color.length == 1) {
-                        if (j == 1) {
-                            break;
-                        }
-                        ball.setAttribute('b_color', `${ball_color[j]}`)
-                        ball.style.backgroundColor = `${colors[ball_color[j]]}`;
-                    } else if (ball_color.length == 2) {
-                        if (j == 2) {
-                            break;
-                        }
-                        ball.setAttribute('b_color', `${ball_color[j]}`)
-                        ball.style.backgroundColor = `${colors[ball_color[j]]}`;
-                    } else {
-                        ball.setAttribute('b_color', `${ball_color[j]}`)
-                        ball.style.backgroundColor = `${colors[ball_color[j]]}`;
-                    }
+                if (ball_color != '' && ball_color[j]) {
+                    ball.setAttribute('b_color', `${ball_color[j]}`)
+                    ball.style.backgroundColor = `${colors[ball_color[j]]}`;
                     // Втыкаем в колбу
                     flasks[i].prepend(ball);
-                } else {
-                    // Проверка
                 }
             }
         }
@@ -202,7 +186,7 @@ function move_back() {
         if (current_move >= 0) {
             current_move -= 1;
             console.log('current_move = '+current_move);
-            document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
+            document.querySelector('button#move_back').innerHTML = `Ход назад (${current_move})`;
         }
         // Проверка
         console.log('movement_points = '+movement_points)

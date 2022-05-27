@@ -1,4 +1,7 @@
 // Инициализация
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
 let g_body = document.querySelector('div#g_body')
     g_body_wrapper = g_body.children[1],
     flasks = document.querySelectorAll('div.flask');
@@ -9,6 +12,9 @@ let change_num_balls = document.querySelector('button#change_num_balls'),
     ball = null,
     ball_max = g_num_balls_value,
     ball_numForWin = ball_max * (flasks.length - 2),
+    flask_add_num = 0,
+    flask_add_max = 1,
+    flask_add_confirm = 0,
     movement_points = 0,
     movement_points_max = 10,
     current_move = 0,
@@ -71,6 +77,10 @@ function win() {
                 } else {
                     win_check_1 = 1;
                 }
+            }
+            // Делаем проверку на режим с одним шаром в колбе
+            if (flasks[0].children.length == 1 && flasks[1].children.length == 1 && flasks[2].children.length == 1 && flasks[3].children.length == 1 && flasks[4].children.length == 1 && flasks[5].children.length == 1 && flasks[6].children.length == 1 && flasks[7].children.length == 1) {
+                win_check_1 = 0;
             }
             // Делаем вторую проверку, проверяем на соответствие первого и последнего шара
             if (flasks[i].children.length == ball_max) {
@@ -136,7 +146,7 @@ function flask_click(e) {
                 b_color_active = ball.getAttribute('b_color');
                 e.children[0].classList.add('active_ball');
                 e.children[0].style.position = 'absolute';
-                e.children[0].style.bottom = `${e.children[0].clientHeight * ball_max + (ball_max * 4)}px`;
+                e.children[0].style.bottom = `${e.children[0].clientHeight * ball_max + (ball_max * 4) + 20}px`;
                 click_check = 1;
             }
         }
@@ -165,7 +175,7 @@ function flask_click(e) {
             if (current_move < 5) {
                 current_move += 1;
                 console.log('current_move = '+current_move);
-                document.querySelector('button#move_back').innerHTML = `Вернуться на ход назад (${current_move})`;
+                document.querySelector('button#move_back').innerHTML = `Ход назад (${current_move})`;
             }
             // Сбрасываем кол-во ходов до 0, чтобы перейти с 10 хода на 0, если дошли до 10 и ходим дальше
             if (firstBack_check == 1 && movement_points == 10) {
@@ -188,9 +198,11 @@ function flask_click(e) {
             ball.style.bottom = `${ball.clientHeight * (ball.parentNode.children.length - 1) + ((ball.parentNode.children.length - 1) * 4)}px`;
             setTimeout(function() {
                 // Обнуляем все значения и очищаем активный класс
-                ball.style.position = null;
-                ball.style.bottom = null;
-                ball.classList.remove('active_ball');
+                if (ball.classList.contains('active_ball')) {
+                    ball.style.position = null;
+                    ball.style.bottom = null;
+                    ball.classList.remove('active_ball');
+                }
                 ball = null,
                 b_color = null,
                 b_color_active = null;
@@ -202,27 +214,61 @@ function flask_click(e) {
     win();
 }
 
+// Добавление колбы
 function flask_add() {
-    let flask = document.createElement('div');
-    // Присваиваем class
-    flask.setAttribute('class', 'flask');
-    // Присваиваем высоту
-    flask.style.height = `${flasks[0].style.height}`;
-    // Втыкаем в wrapper
-    g_body_wrapper.append(flask);
-    // Обновляем кол-во колб
-    flasks = document.querySelectorAll('div.flask');
+    // Проверка игрока
+    if (flask_add_num < flask_add_max) {
+        flask_add_num += 1;
+    } else {
+        flask_add_confirm = confirm(`По правилам игры, Вы можете добавить только ${flask_add_max} колбу, любите играть по правилам?`);
+    }
+    if (flask_add_confirm != true) {
+        let flask = document.createElement('div');
+        // Присваиваем class
+        flask.setAttribute('class', 'flask');
+        // Присваиваем высоту
+        flask.style.height = `${flasks[0].style.height}`;
+        // Втыкаем в wrapper
+        g_body_wrapper.append(flask);
+        // Обновляем кол-во колб
+        flasks = document.querySelectorAll('div.flask');
 
-    // Обновляем массивы с сохр. ходами, добавляем пустой слот
-    level[flasks.length - 1] = '';
-    movement_layer_1[flasks.length - 1] = 100;
-    movement_layer_2[flasks.length - 1] = 100;
-    movement_layer_3[flasks.length - 1] = 100;
-    movement_layer_4[flasks.length - 1] = 100;
-    movement_layer_5[flasks.length - 1] = 100;
-    movement_layer_6[flasks.length - 1] = 100;
-    movement_layer_7[flasks.length - 1] = 100;
-    movement_layer_8[flasks.length - 1] = 100;
-    movement_layer_9[flasks.length - 1] = 100;
-    movement_layer_10[flasks.length - 1] = 100;
+        // Обновляем массивы с сохр. ходами, добавляем пустой слот
+        level[flasks.length - 1] = '';
+        movement_layer_1[flasks.length - 1] = 100;
+        movement_layer_2[flasks.length - 1] = 100;
+        movement_layer_3[flasks.length - 1] = 100;
+        movement_layer_4[flasks.length - 1] = 100;
+        movement_layer_5[flasks.length - 1] = 100;
+        movement_layer_6[flasks.length - 1] = 100;
+        movement_layer_7[flasks.length - 1] = 100;
+        movement_layer_8[flasks.length - 1] = 100;
+        movement_layer_9[flasks.length - 1] = 100;
+        movement_layer_10[flasks.length - 1] = 100;
+
+        // Добавляем или убираем скролл
+        let g_body_wrapper_h = g_body_wrapper.clientHeight,
+            g_body_h = g_body.clientHeight;
+        if (g_body_wrapper_h > g_body_h) {
+            g_body.style.overflowY = 'scroll';
+        } else {
+            g_body.style.overflowY = 'hidden';
+        }
+    }
 }
+
+// Обновление Vh
+function vh_refresh () {
+    vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+vh_refresh();
+
+window.addEventListener('resize', function() {
+    vh_refresh();
+})
+
+window.addEventListener('scroll', function() {
+    vh_refresh();
+})
