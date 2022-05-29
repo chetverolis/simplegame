@@ -150,4 +150,5 @@ change_num_balls.addEventListener('click', function() {
     // Генерируем новый уровень с новым кол-вом шаров
     generateLvl();
     saveLvl();
+    scroll_switch();
 })
