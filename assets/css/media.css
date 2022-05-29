@@ -23,6 +23,44 @@
     }
 }
 
+@media (max-width: 490px) {
+    #g_body > .wrapper > .flask {
+        width: calc(35px + 12px);
+        height: calc(35px * 3px + 12px);
+    }
+
+    #g_body > .wrapper > .flask > .ball {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 425px) {
+    #g_body > .wrapper > .flask {
+        width: calc(30px + 12px);
+        height: calc(30px * 3px + 12px);
+    }
+
+    #g_body > .wrapper > .flask > .ball {
+        width: 30px;
+        height: 30px;
+    }
+
+    #g_body > .wrapper > .flask {
+        margin: 5px 6px 64px 6px;
+    }
+
+    #g_body > .wrapper > .flask::before {
+        width: calc(100% + 8px);
+        left: -4px;
+    }
+
+    #g_body > .wrapper > .flask::after {
+        width: calc(100% + 8px);
+        left: -4px;
+    }
+}
+
 @media (max-width: 414px) {
     #g_body > .header > button {
         height: 40px;
@@ -40,6 +78,19 @@
         flex-direction: column;
     }
 }
+
+@media (max-width: 400px) {
+    #g_body > .wrapper > .flask {
+        width: calc(30px + 12px);
+        height: calc(30px * 3px + 12px);
+    }
+
+    #g_body > .wrapper > .flask > .ball {
+        width: 30px;
+        height: 30px;
+    }
+}
+
 
 @media (max-width: 332px) {
     #g_body > .wrapper > .flask {
