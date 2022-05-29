@@ -8,6 +8,17 @@ let g_body = document.querySelector('div#g_body'),
     g_body_header = g_body.children[0],
     flasks = document.querySelectorAll('div.flask');
 
+// Фикс для темы warcraft
+function skin_warcraft_fix() {
+    if (g_body_wrapper.clientHeight + g_body_header.clientHeight > g_body.clientHeight) {
+        document.documentElement.style.setProperty('--gwh_height', `${g_body_wrapper.clientHeight + g_body_header.clientHeight + 110}px`);
+    } else {
+        document.documentElement.style.setProperty('--gwh_height', `${g_body.clientHeight}px`);
+    }
+}
+
+skin_warcraft_fix();
+
 let change_num_balls = document.querySelector('button#change_num_balls'),
     g_num_balls = document.querySelector('input#g_num_balls'),
     g_num_balls_value = document.querySelector('input#g_num_balls').value,
@@ -360,8 +371,10 @@ window.addEventListener('resize', function() {
     vh_refresh();
     scroll_switch();
     flask_height_update();
+    skin_warcraft_fix();
 })
 
 window.addEventListener('scroll', function() {
     vh_refresh();
+    skin_warcraft_fix();
 })
