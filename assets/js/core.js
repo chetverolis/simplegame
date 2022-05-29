@@ -80,15 +80,15 @@ function scroll_switch() {
         if (g_body_wrapper_h + g_body_header_h > g_body_h) {
             g_body.style.overflowY = 'scroll';
             // Проверка
-            console.log('scroll on');
-            console.log('g_body_wrapper_h = '+g_body_wrapper_h);
-            console.log('g_body_h = '+g_body_h);     
+            // console.log('scroll on');
+            // console.log('g_body_wrapper_h = '+g_body_wrapper_h);
+            // console.log('g_body_h = '+g_body_h);     
         } else {
             g_body.style.overflowY = 'hidden';
             // Проверка
-            console.log('scroll off');
-            console.log('g_body_wrapper_h = '+g_body_wrapper_h);
-            console.log('g_body_h = '+g_body_h);
+            // console.log('scroll off');
+            // console.log('g_body_wrapper_h = '+g_body_wrapper_h);
+            // console.log('g_body_h = '+g_body_h);
         }
     }, 400)
 }
