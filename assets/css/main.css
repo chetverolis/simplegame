@@ -5,7 +5,7 @@ body {
     position: relative;
     margin: 0;
     background-color: #141414;
-    background-image: url('/theballs/assets/img/logo.svg');
+    background-image: url('/assets/img/logo.svg');
     background-repeat: repeat;
     background-size: 200px;
     animation: background_move 40s infinite alternate linear;
@@ -211,11 +211,6 @@ body {
 
 #g_body > .wrapper > .flask:hover {
     cursor: pointer;
-    transform: scale(1.04);
-    -webkit-transform: scale(1.04);
-    -moz-transform: scale(1.04);
-    -ms-transform: scale(1.04);
-    -o-transform: scale(1.04);
 }
 
 #g_body > .wrapper > .flask > .ball {
