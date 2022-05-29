@@ -378,3 +378,8 @@ window.addEventListener('scroll', function() {
     vh_refresh();
     skin_warcraft_fix();
 })
+
+g_body.addEventListener('scroll', function() {
+    vh_refresh();
+    skin_warcraft_fix();
+})
