@@ -1,0 +1,128 @@
+#g_body {
+    background-color: #1f1f1f;
+}
+
+#g_body::after {
+    background: linear-gradient(180deg, hsl(0deg 0% 0% / 10%) 0%, transparent 100%);
+}
+
+/* Кнопки и поля */
+#g_body > .header > button {
+    background-color: #626262;
+    color: #fff;
+    border: 1px solid #474747;
+}
+
+#g_body > .header > button:hover {
+    background-color: #474747;
+    border: 1px solid #474747;
+}
+
+#g_body > .header > button:hover > svg {
+    fill: #fff;
+}
+
+#g_body > .header > button::after {
+    border-bottom: 5px solid #474747;
+}
+
+#g_body > .header > input {
+    background-color: #626262;
+    color: #ffffff;
+    border: 1px solid #474747;
+}
+
+#g_body > .header > input:hover {
+    background-color: #474747!important;
+    border: 1px solid #474747!important;
+}
+
+/* Колбы и шары*/
+#g_body > .wrapper > .flask {
+    background-color: rgb(230 230 230 / 10%);
+}
+
+#g_body > .wrapper > .flask::after {
+    background-color: rgb(230 230 230 / 10%);
+}
+
+#g_body > .wrapper > .flask::before {
+    background-color: rgb(255,255,255,10%);
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="0"] {
+    background-color: #f64538!important;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="1"] {
+    background-color: #017fdd!important;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="2"] {
+    background-color: #78f638!important;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="3"] {
+    background-color: #ecaf01!important;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="4"] {
+    background-color: #a53ee6!important;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="5"] {
+    background-color: #01c1dd!important;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="6"] {
+    background-color: #e63e98!important;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="7"] {
+    background-color: #f69838!important;
+}
+
+#g_body > .wrapper > .flask > .ball[b_color="8"] {
+    background-color: #cbcccd!important;
+}
+
+/* Меню */
+#menu {
+    background-color: #1f1f1f!important;
+}
+
+#menu > .close > svg {
+    fill: #626262!important;
+}
+
+#menu > .close > svg:hover {
+    fill: #474747!important;
+}
+
+#menu > form > input[name=field] + label{
+    border: 2px solid #626262!important;
+}
+
+#menu > form > input[name=field]:checked + label{
+    border: 2px solid #008000!important;
+}
+
+#menu > button {
+    background-color: #626262!important;
+    color: #fff!important;
+    border: 1px solid #474747!important;
+}
+
+#menu > button::after {
+    border-bottom: 5px solid #474747!important;
+}
+
+#menu > button:hover {
+    background-color: #008000!important;
+    color: #ffffff!important;
+    border: 1px solid #004d00!important;
+}
+
+#menu > button:hover::after {
+    border-bottom: 5px solid #004d00!important;
+}

@@ -1,9 +1,5 @@
 // Генерируем уровень
 function generateLvl() {
-    for (let i = 0; i < flasks.length; i++) {
-        flasks[i].style.height = `${54 * ball_max}px`
-    }
-
     for (let i = 0; i < (flasks.length - 2); i++) {
         for (let j = 0; j < ball_max; j++) {
             // Получаем случайное число от 0 до 8
@@ -30,6 +26,8 @@ function generateLvl() {
             }
         }
     }
+
+    flask_height_update();
 };
 
 // Сохраняем сгенерируемый уровень
@@ -57,6 +55,8 @@ function saveLvl() {
 
 generateLvl();
 saveLvl();
+scroll_switch();
+
 
 function restartLvl() {
     // Сохраняем текущую высоту колбы и стираем уровень
@@ -118,7 +118,7 @@ function restartLvl() {
     firstBack_check = 0;
 
     // Обновляем число в кнопке
-    document.querySelector('button#move_back').innerHTML = `Ход назад (${current_move})`;
+    document.querySelector('span#move_back').innerHTML = current_move;
 
     // Добавляем или убираем скролл
     let g_body_wrapper_h = g_body_wrapper.clientHeight,

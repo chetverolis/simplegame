@@ -6,17 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/skins/minecraft.css">
-    <title>Game Test</title>
+    <link rel="stylesheet" href="assets/css/media.css">
+    <title>The Balls</title>
 </head>
 <body>
     <div id="g_body">
         <div class="header">
             <input id="g_num_balls" type="text" value="4"></input>
-            <button id="change_num_balls" class="button">Изменить</button>
-            <button class="button" onClick="restartLvl();">Рестарт</button>
-            <button id="move_back" class="button" onClick="move_back();">Ход назад (0)</button>
-            <button id="add_flask" class="button" onClick="flask_add();">Добавить колбу</button>
+            <button id="change_num_balls" class="button">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </button>
+            <button class="button" onClick="restartLvl();">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg>
+            </button>
+            <button class="button" onClick="move_back();">
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+                <span id="move_back" >0</span>
+            </button>
+            <button id="add_flask" class="button" onClick="flask_add();">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="#FFFFFF"><path class="cls-2" d="M37.78,34.54,27.6,21.43V14.09l2-2.55A1.19,1.19,0,0,0,28.7,9.6H19.3a1.19,1.19,0,0,0-.94,1.94l2,2.55v7.32L10.22,34.51A2.4,2.4,0,0,0,12.1,38.4H35.88A2.38,2.38,0,0,0,37.78,34.54Z"/><rect class="cls-2" x="37.42" y="13.13" width="1.75" height="10" rx="0.87" transform="translate(20.17 56.42) rotate(-90)" /><rect class="cls-2" x="37.42" y="13.13" width="1.75" height="10" rx="0.87" transform="translate(76.6 36.25) rotate(-180)" /></svg>
+            </button>
+            <button class="button" onClick="menu_toggle()">
+                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="48px" viewBox="0 0 24 24" width="48px" fill="#FFFFFF"><g><path d="M0,0h24v24H0V0z" fill="none"/><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></g></svg>
+            </button>
         </div>
         <div class="wrapper">
             <div class="flask"></div>
@@ -31,12 +43,33 @@
             <div class="flask"></div>
             <div class="flask"></div>
         </div>
+        <div id="menu">
+            <div class="close">
+                <svg onClick="menu_toggle();" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </div>
+            <form method="post">
+                <input type="radio" name="field" id="skin_default">
+                <label for="skin_default"><img src="../../../assets/img/skins/default/preview.jpg" /></label>
+              
+                <input type="radio" name="field" id="skin_dark">
+                <label for="skin_dark"><img src="../../../assets/img/skins/dark/preview.jpg" /></label>
+              
+                <input type="radio" name="field" id="skin_minecraft">
+                <label for="skin_minecraft"><img src="../../../assets/img/skins/minecraft/preview.jpg" /></label>
+
+                <input type="radio" name="field" id="skin_warcraft">
+                <label for="skin_warcraft"><img src="../../../assets/img/skins/warcraft/preview.jpg" /></label>
+              </form>
+              <button id="skin_save" onClick="save_skin();">Применить</button>
+        </div>
     </div>
     <!-- <audio src="https://assets.codepen.io/1256430/whistle.mp3" id="sound" preload="auto" hidden></audio> -->
     <script src='https://cdn.jsdelivr.net/npm/canvas-confetti@1.2.0/dist/confetti.browser.min.js'></script>
     <script src="assets/js/core.js"></script>
     <script src="assets/js/level.js"></script>
     <script src="assets/js/move.js"></script>
+    <script src="assets/js/skin.js"></script>
+    <script src="assets/js/menu.js"></script>
     <script src="assets/js/confetti.js"></script>
 </body>
 </html>

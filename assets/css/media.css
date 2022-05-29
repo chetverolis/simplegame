@@ -1,0 +1,54 @@
+@media (max-width: 720px) {
+    #g_body > .wrapper {
+        width: 100%;
+        padding: 30px 0 30px 0;
+    }
+
+    #g_body > .header {
+        flex-wrap: wrap;
+    }
+
+    #g_body > .header > input {
+        width: 75px;
+    }
+
+    #g_body > .wrapper > .flask {
+        width: calc(45px + 12px);
+        height: calc(45px * 3px + 12px);
+    }
+
+    #g_body > .wrapper > .flask > .ball {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 414px) {
+    #g_body > .header > button {
+        height: 40px;
+        padding: 0 8px 0 8px;
+    }
+
+    #g_body > .header > input {
+        width: 80px;
+        height: 40px;
+        padding: 0 8px 0 8px;
+    }
+
+    #menu > form {
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 332px) {
+    #g_body > .wrapper > .flask {
+        width: calc(30px + 12px);
+        height: calc(30px * 3px + 12px);
+    }
+
+    #g_body > .wrapper > .flask > .ball {
+        width: 30px;
+        height: 30px;
+    }
+}

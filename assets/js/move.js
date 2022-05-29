@@ -186,7 +186,7 @@ function move_back() {
         if (current_move >= 0) {
             current_move -= 1;
             console.log('current_move = '+current_move);
-            document.querySelector('button#move_back').innerHTML = `Ход назад (${current_move})`;
+            document.querySelector('span#move_back').innerHTML = current_move;
         }
         // Проверка
         console.log('movement_points = '+movement_points)

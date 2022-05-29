@@ -2,9 +2,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    position: relative;
     margin: 0;
     background-color: #141414;
-    background-image: url('/theballs/assets/img/logo.svg');
+    background-image: url('/assets/img/logo.svg');
     background-repeat: repeat;
     background-size: 200px;
     animation: background_move 40s infinite alternate linear;
@@ -21,18 +22,7 @@ body {
     height: calc(var(--vh, 1vh) * 100);
     position: relative;
     background-color: #ffffff;
-    overflow-x: hidden;
     overflow-y: hidden;
-}
-
-#g_body > .header {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    width: calc(100% - 20px);
-    position: relative;
-    margin: 20px 10px 20px 10px;
-    z-index: 1;
 }
 
 #g_body::after {
@@ -41,22 +31,37 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 120px;
-    background: linear-gradient(180deg, rgb(0 0 0 / 10%) 0%, transparent 100%);
+    height: 160px;
+    background: linear-gradient(180deg, rgb(0 0 0 / 20%) 0%, transparent 100%);
+}
+
+#g_body > .header {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: calc(100% - 20px);
+    position: relative;
+    margin: 25px 10px 25px 10px;
+    z-index: 1;
+}
+
+#g_body > .header > * {
+    margin: 0 5px 10px 5px;
 }
 
 #g_body > .header > button {
-    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: max-content;
     height: 50px;
     padding: 0 15px 0 15px;
-    margin: 0;
     border: 0;
-    background-color: #f0f0f0;
+    background-color: #b3b3b3;
     position: relative;
-    color: #797982;
+    color: #fff;
     overflow: hidden;
-    border: 1px solid #d6d6d6;
+    border: 1px solid #999999;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -78,18 +83,23 @@ body {
     left: 0;
     bottom: -1px;
     background-color: transparent;
-    border-bottom: 5px solid #d6d6d6;
+    border-bottom: 5px solid #999999;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
 }
 
 #g_body > .header > button:hover {
-    background-color: #fbe9d7;
-    color: #eb8c2f;
-    border: 1px solid #eb8c2f;
+    background-color: #999999;
+    color: #ffffff;
+    border: 1px solid #999999;
 }
 
 #g_body > .header > button:hover::after {
@@ -100,33 +110,45 @@ body {
     left: 0;
     bottom: -1px;
     background-color: transparent;
-    border-bottom: 5px solid #eb8c2f;
+    border-bottom: none;
+}
+
+#g_body > .header > button:hover > svg {
+    fill: #fff;
+}
+
+#g_body > .header > button > svg {
+    width: 25px;
+    height: 25px;
+    margin: 0 10px 0 10px;
+    fill: #fff;
 }
 
 #g_body > .header > input {
-    width: 120px;
     height: 50px;
     padding: 0 15px 0 15px;
-    margin: 0;
     background-color: #ffffff;
-    color: #494949;
+    color: #999999;
     overflow: hidden;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #ffffff;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
 }
 
 #g_body > .header > input:hover {
-    outline: 2px solid #eb8c2f;
-    outline-offset: -2px;
+    border: 1px solid #999999;
 }
 
 #g_body > .header > input:focus-visible {
-    outline: 2px solid #eb8c2f;
-    outline-offset: -2px;
+    outline: none;
 }
 
 #g_body > .wrapper {
@@ -146,17 +168,21 @@ body {
     align-items: center;
     justify-content: flex-end;
     position: relative;
-    width: 62px;
-    height: 162px;
-    background-color: rgb(230 230 230 / 80%);
+    width: calc(50px + 12px);
+    height: calc(50px * 3 + 12px);
+    background-color: rgb(0 0 0 / 10%);
     margin: 5px 12px 64px 12px;
     padding: 5px 0 5px 0;
-    border: 1px solid #e6e6e6;
     border-radius: 0 0 30px 30px;
     -webkit-border-radius: 0 0 30px 30px;
     -moz-border-radius: 0 0 30px 30px;
     -ms-border-radius: 0 0 30px 30px;
     -o-border-radius: 0 0 30px 30px;
+    transition: transform .2s ease-in-out;
+    -webkit-transition: transform .2s ease-in-out;
+    -moz-transition: transform .2s ease-in-out;
+    -ms-transition: transform .2s ease-in-out;
+    -o-transition: transform .2s ease-in-out;
 }
 
 #g_body > .wrapper > .flask::after {
@@ -166,7 +192,7 @@ body {
     position: absolute;
     top: -8px;
     left: -8px;
-    background-color: #e6e6e6;
+    background-color: rgb(0 0 0 / 10%);
     border-radius: 4px;
     z-index: 0;
 }
@@ -178,9 +204,18 @@ body {
     position: absolute;
     top: -8px;
     left: -8px;
-    background-color: rgb(255,255,255,50%);
+    background-color: rgb(0 0 0 / 10%);
     border-radius: 4px;
     z-index: 2;
+}
+
+#g_body > .wrapper > .flask:hover {
+    cursor: pointer;
+    transform: scale(1.04);
+    -webkit-transform: scale(1.04);
+    -moz-transform: scale(1.04);
+    -ms-transform: scale(1.04);
+    -o-transform: scale(1.04);
 }
 
 #g_body > .wrapper > .flask > .ball {
@@ -194,9 +229,163 @@ body {
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
-    transition: all .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
-    -webkit-transition: all .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
-    -moz-transition: all .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
-    -ms-transition: all .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
-    -o-transition: all .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
+    transition: top .3s cubic-bezier(0.82,-0.01,0.51,1.18), bottom .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
+    -webkit-transition: top .3s cubic-bezier(0.82,-0.01,0.51,1.18), bottom .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
+    -moz-transition: top .3s cubic-bezier(0.82,-0.01,0.51,1.18), bottom .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
+    -ms-transition: top .3s cubic-bezier(0.82,-0.01,0.51,1.18), bottom .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
+    -o-transition: top .3s cubic-bezier(0.82,-0.01,0.51,1.18), bottom .3s cubic-bezier(0.82,-0.01, 0.51, 1.18);
+}
+
+/* Меню */
+#menu {
+    display: none;
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: #ffffff;
+    z-index: 4;
+}
+
+#menu.open {
+    display: block;
+    animation: open .6s ease-in-out;
+    -webkit-animation: open .6s ease-in-out;
+}
+
+#menu > .close {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: calc(100% - 10px);
+    height: 50px;
+    margin: 5px;
+}
+
+#menu > .close > svg {
+    width: 50px;
+    height: 50px;
+    fill: #b3b3b3;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+}
+
+#menu > .close > svg:hover {
+    width: 50px;
+    height: 50px;
+    fill: #999999;
+    cursor: pointer;
+}
+
+#menu > form {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    height: max-content;
+    margin: 50px 0 50px 0;
+}
+
+#menu > form > input[name=field]{
+    display: none;
+}
+
+#menu > form > label > img {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+#menu > form > input[name=field] + label{
+    width: 150px;
+    height: 150px;
+    border: 2px solid #b3b3b3;
+    margin: 20px 10px 20px 10px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+#menu > form > input[name=field]:checked + label{
+    border: 2px solid #008000;
+}
+
+#menu > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    width: 80%;
+    height: 50px;
+    margin: 25px 10% 25px 10%;
+    padding: 0 15px 0 15px;
+    border: 0;
+    background-color: #b3b3b3;
+    position: relative;
+    color: #fff;
+    overflow: hidden;
+    border: 1px solid #999999;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+
+#menu > button::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    background-color: transparent;
+    border-bottom: 5px solid #999999;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+}
+
+#menu > button:hover {
+    background-color: #008000;
+    color: #ffffff;
+    border: 1px solid #004d00;
+}
+
+#menu > button:hover::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    background-color: transparent;
+    border-bottom: 5px solid #004d00;
 }

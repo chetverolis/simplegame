@@ -11,9 +11,13 @@
     left: 0;
     width: 100%;
     height: 25px;
-    background-image: url('../../../assets/img/skins/minecraft/grass.jpg');
+    background-image: url('../../../assets/img/skins/minecraft/grass.png');
     background-repeat: repeat;
     background-size: 100px;
+}
+
+#g_body::after {
+    background: linear-gradient(180deg, hsl(0deg 0% 0% / 20%) 0%, transparent 100%);
 }
 
 /* Кнопки и поля */
@@ -38,24 +42,30 @@
 }
 
 #g_body > .header > input {
-    border: 1px solid #000!important;
+    border: 1px solid #ffffff!important;
+    color: #000!important;
 }
 
-#g_body > .header > input:hover {
-    outline: 2px solid #000!important;
-}
-
-#g_body > .header > input:focus-visible {
-    outline: 2px solid #000!important;
+#g_body > .header > input {
+    border: 1px solid #000000!important;
 }
 
 /* Колбы и шары*/
 #g_body > .wrapper > .flask {
+    background-color: rgb(255 255 255 / 60%);
     border-radius: 0 0 0 0!important;
     -webkit-border-radius: 0 0 0 0!important;
     -moz-border-radius: 0 0 0 0!important;
     -ms-border-radius: 0 0 0 0!important;
     -o-border-radius: 0 0 0 0!important;
+}
+
+#g_body > .wrapper > .flask::after {
+    background-color: rgb(255 255 255 / 60%);
+}
+
+#g_body > .wrapper > .flask::before {
+    background-color: rgb(255,255,255,60%);
 }
 
 #g_body > .wrapper > .flask > .ball {
@@ -118,4 +128,48 @@
     background-image: url('../../../assets/img/skins/minecraft/SkeletonFace.png');
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+/* Меню */
+#menu {
+    background-image: url(../../../assets/img/skins/minecraft/background.jpg);
+    background-repeat: repeat;
+    background-size: 128px;
+}
+
+#menu > .close > svg {
+    fill: #ffffff!important;
+}
+
+#menu > .close > svg:hover {
+    fill: #ffffff!important;
+    opacity: .8;
+}
+
+#menu > form > input[name=field] + label{
+    border: 2px solid rgb(255 255 255 / 60%)!important;
+}
+
+#menu > form > input[name=field]:checked + label{
+    border: 2px solid rgb(255 255 255 / 100%)!important;
+}
+
+#menu > button {
+    background-color: #858585!important;
+    color: #fff!important;
+    border: 1px solid #000!important;
+}
+
+#menu > button::after {
+    border-bottom: 5px solid #595959!important;
+}
+
+#menu > button:hover {
+    background-color: #7e88bf!important;
+    color: #fff!important;
+    border: 1px solid #000!important;
+}
+
+#menu > button:hover::after {
+    border-bottom: 5px solid #5c669c!important;
 }

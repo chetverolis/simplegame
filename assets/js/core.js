@@ -5,6 +5,7 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 let g_body = document.querySelector('div#g_body'),
     g_body_wrapper = g_body.children[1],
+    g_body_header = g_body.children[0],
     flasks = document.querySelectorAll('div.flask');
 
 let change_num_balls = document.querySelector('button#change_num_balls'),
@@ -57,6 +58,29 @@ let movement_layer_1 = Array(flasks.length).fill(100),
     movement_layer_8 = Array(flasks.length).fill(100),
     movement_layer_9 = Array(flasks.length).fill(100),
     movement_layer_10 = Array(flasks.length).fill(100);
+
+// Переключение скролла
+function scroll_switch() {
+    setTimeout(function() {
+        // Добавляем или убираем скролл
+        let g_body_wrapper_h = g_body_wrapper.clientHeight,
+            g_body_header_h = g_body_header.clientHeight,
+            g_body_h = g_body.clientHeight;
+        if (g_body_wrapper_h + g_body_header_h > g_body_h) {
+            g_body.style.overflowY = 'scroll';
+            // Проверка
+            console.log('scroll on');
+            console.log('g_body_wrapper_h = '+g_body_wrapper_h);
+            console.log('g_body_h = '+g_body_h);     
+        } else {
+            g_body.style.overflowY = 'hidden';
+            // Проверка
+            console.log('scroll off');
+            console.log('g_body_wrapper_h = '+g_body_wrapper_h);
+            console.log('g_body_h = '+g_body_h);
+        }
+    }, 400)
+}
 
 // Победа
 function win() {
@@ -190,7 +214,7 @@ function flask_click(e) {
             if (current_move < 5) {
                 current_move += 1;
                 console.log('current_move = '+current_move);
-                document.querySelector('button#move_back').innerHTML = `Ход назад (${current_move})`;
+                document.querySelector('span#move_back').innerHTML = current_move;
             }
 
             // Сбрасываем кол-во ходов до 0, чтобы перейти с 10 хода на 0, если дошли до 10 и ходим дальше
@@ -300,14 +324,28 @@ function flask_add() {
         movement_layer_10[flasks.length - 1] = 100;
 
         // Добавляем или убираем скролл
-        let g_body_wrapper_h = g_body_wrapper.clientHeight,
-            g_body_h = g_body.clientHeight;
-        if (g_body_wrapper_h > g_body_h) {
-            g_body.style.overflowY = 'scroll';
-        } else {
-            g_body.style.overflowY = 'hidden';
-        }
+        scroll_switch();
     }
+}
+
+function flask_height_update() {
+    for (let i = 0; i < flasks.length; i++) {
+        flasks[i].style.height = `${flasks[0].children[0].clientHeight * ball_max + (ball_max * 4)}px`
+    }
+}
+
+// Меню
+function menu_toggle() {
+    let menu = document.querySelector('div#menu');
+
+    // Открываем или закрываем меню
+    if (menu.classList.contains('open')) {
+        g_body.style.overflowY = '';
+        scroll_switch();
+    } else {
+        g_body.style.overflowY = 'hidden';
+    }
+    menu.classList.toggle('open');
 }
 
 // Обновление Vh
@@ -320,6 +358,8 @@ vh_refresh();
 
 window.addEventListener('resize', function() {
     vh_refresh();
+    scroll_switch();
+    flask_height_update();
 })
 
 window.addEventListener('scroll', function() {
