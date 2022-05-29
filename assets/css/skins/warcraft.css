@@ -16,6 +16,7 @@
     background-image: url(../../../assets/img/skins/warcraft/border_right.png);
     background-repeat: repeat-y;
     background-size: 25px;
+    z-index: 0;
 }
 
 #g_body::after {
@@ -28,6 +29,7 @@
     background-image: url(../../../assets/img/skins/warcraft/border_left.png);
     background-repeat: repeat-y;
     background-size: 25px;
+    z-index: 0;
 }
 
 /* Кнопки и поля */
