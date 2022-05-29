@@ -9,27 +9,25 @@
 #g_body::before {
     content: '';
     width: 25px;
-    height: 100%;
+    height: calc(var(--gwh_height));
     position: absolute;
     top: 0;
     left: 0;
     background-image: url(../../../assets/img/skins/warcraft/border_right.png);
     background-repeat: repeat-y;
     background-size: 25px;
-    z-index: 4;
 }
 
 #g_body::after {
     content: '';
     width: 25px;
-    height: 100%;
+    height: calc(var(--gwh_height));
     position: absolute;
     top: 0;
     left: calc(100% - 25px);
     background-image: url(../../../assets/img/skins/warcraft/border_left.png);
     background-repeat: repeat-y;
     background-size: 25px;
-    z-index: 4;
 }
 
 /* Кнопки и поля */
