@@ -26,15 +26,21 @@
     border-bottom: 5px solid #474747;
 }
 
-#g_body > .header > input {
+#g_body > .header > input,
+#g_body > #menu > input {
     background-color: #626262;
     color: #ffffff;
     border: 1px solid #474747;
 }
 
-#g_body > .header > input:hover {
+#g_body > .header > input:hover,
+#g_body > #menu > input:hover {
     background-color: #474747!important;
     border: 1px solid #474747!important;
+}
+
+#menu > label {
+    color: #e6e6e6!important;
 }
 
 /* Колбы и шары*/

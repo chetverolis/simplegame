@@ -58,7 +58,7 @@ function move() {
 
                 // Обрезаем строки в массиве
                 for (let i = 0; i < e.length; i++) {
-                    e[i] = String(e[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
+                    e[i] = String(e[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max * 2));
                 }
 
                 return e;

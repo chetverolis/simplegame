@@ -1,9 +1,22 @@
 // Генерируем уровень
 function generateLvl() {
+    skin_load();
+
+    function randomNum(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Получаем новые значения
+    g_num_balls_value = document.querySelector('input#g_num_balls').value;
+
+    if (g_num_balls_value == '') {
+        ball_max = randomNum(3, 5);
+    }
+
     for (let i = 0; i < (flasks.length - 2); i++) {
         for (let j = 0; j < ball_max; j++) {
             // Получаем случайное число от 0 до 8
-            let rnd_num = Math.floor(Math.random() * 9);
+            let rnd_num = randomNum(0, 8);
             // Проверяем на кол-во существующих цветов
             if (colors_check[rnd_num] < ball_max) {
                 // Создаём шар
@@ -45,7 +58,7 @@ function saveLvl() {
 
     // Обрезаем строки в массиве
     for (let i = 0; i < level.length; i++) {
-        level[i] = String(level[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max + 2));
+        level[i] = String(level[i]).replace('undefined', '').replace('100', '').replace(/.$/, '').substring(0, (ball_max * 2));
     }
 
     // Проверка
@@ -132,23 +145,26 @@ function restartLvl() {
 
 // Изменение кол-ва шаров
 change_num_balls.addEventListener('click', function() {
-    // Сбрасываем текущий уровень
-    restartLvl();
-
-    // Стираем уровень
-    for (let i = 0; i < flasks.length; i++) {
-        flasks[i].innerHTML = null;
-    }
-
-    // Обнуляем чек цветов
-    colors_check = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
     // Получаем новые значения
     g_num_balls_value = document.querySelector('input#g_num_balls').value;
-    ball_max = g_num_balls_value;
+    if (g_num_balls_value != '' && isNaN(parseInt(g_num_balls_value)) == false) {
+        // Сбрасываем текущий уровень
+        restartLvl();
 
-    // Генерируем новый уровень с новым кол-вом шаров
-    generateLvl();
-    saveLvl();
-    scroll_switch();
+        // Стираем уровень
+        for (let i = 0; i < flasks.length; i++) {
+            flasks[i].innerHTML = null;
+        }
+
+        // Обнуляем чек цветов
+        colors_check = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+        // Обновляем значения
+        ball_max = g_num_balls_value;
+
+        // Генерируем новый уровень с новым кол-вом шаров
+        generateLvl();
+        saveLvl();
+        scroll_switch();
+    }
 })

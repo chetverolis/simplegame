@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/media.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <title>The Balls</title>
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -20,10 +23,6 @@
 <body>
     <div id="g_body">
         <div class="header">
-            <input id="g_num_balls" type="text" value="4"></input>
-            <button id="change_num_balls" class="button">
-                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            </button>
             <button class="button" onClick="restartLvl();">
                 <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg>
             </button>
@@ -55,6 +54,8 @@
             <div class="close">
                 <svg onClick="menu_toggle();" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
             </div>
+            <label>Количество шаров:</label>
+            <input id="g_num_balls" type="text" value="" autocomplete="off"></input>
             <form method="post">
                 <input type="radio" name="field" id="skin_default">
                 <label for="skin_default"><img src="assets/img/skins/default/preview.jpg" /></label>
@@ -68,15 +69,15 @@
                 <input type="radio" name="field" id="skin_warcraft">
                 <label for="skin_warcraft"><img src="assets/img/skins/warcraft/preview.jpg" /></label>
               </form>
-              <button id="skin_save" onClick="save_skin();">Применить</button>
+              <button id="settings_save" onClick="save_skin();">Применить</button>
         </div>
     </div>
     <!-- <audio src="https://assets.codepen.io/1256430/whistle.mp3" id="sound" preload="auto" hidden></audio> -->
     <script src='https://cdn.jsdelivr.net/npm/canvas-confetti@1.2.0/dist/confetti.browser.min.js'></script>
     <script src="assets/js/core.js"></script>
+    <script src="assets/js/skin.js"></script>
     <script src="assets/js/level.js"></script>
     <script src="assets/js/move.js"></script>
-    <script src="assets/js/skin.js"></script>
     <script src="assets/js/confetti.js"></script>
 </body>
 </html>

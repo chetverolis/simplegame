@@ -41,13 +41,20 @@
     border-bottom: 5px solid #5c669c!important;
 }
 
-#g_body > .header > input {
+#g_body > .header > input,
+#g_body > #menu > input {
     border: 1px solid #ffffff!important;
     color: #000!important;
 }
 
-#g_body > .header > input {
+#g_body > .header > input:hover,
+#g_body > #menu > input:hover {
     border: 1px solid #000000!important;
+}
+
+#menu > label {
+    color: #fff!important;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 /* Колбы и шары*/
@@ -132,7 +139,7 @@
 
 /* Меню */
 #menu {
-    background-image: url(../../../assets/img/skins/minecraft/background.jpg);
+    background-image: url('../../../assets/img/skins/minecraft/background.jpg');
     background-repeat: repeat;
     background-size: 128px;
 }

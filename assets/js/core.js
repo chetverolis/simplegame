@@ -19,7 +19,7 @@ function skin_warcraft_fix() {
 
 skin_warcraft_fix();
 
-let change_num_balls = document.querySelector('button#change_num_balls'),
+let change_num_balls = document.querySelector('button#settings_save'),
     g_num_balls = document.querySelector('input#g_num_balls'),
     g_num_balls_value = document.querySelector('input#g_num_balls').value,
     ball = null,
@@ -137,8 +137,8 @@ function win() {
                 }
             }
             // Проверка чеков
-            console.log(i+1+' колба win_check_1 = '+win_check_1);
-            console.log(i+1+' колба win_check_2 = '+win_check_2);
+            // console.log(i+1+' колба win_check_1 = '+win_check_1);
+            // console.log(i+1+' колба win_check_2 = '+win_check_2);
 
             // Сравниваем две проверки и в случае соответствия, заносим в массив 1
             if (win_check_1 == win_check_2) {
@@ -164,6 +164,18 @@ function win() {
             alert('You Win!');
             document.location.reload();
         }, 1000)
+    }
+}
+
+// Фикс для бага с position, если быстро нажимать, то некоторые шары остаются с значением absolute
+function position_fix() {
+    for (let i = 0; i < flasks.length; i++) {
+        for (let j = 0; j < ball_max; j++) {
+            if ((flasks[i].children[j] && flasks[i].children[j].classList.contains('active_ball') != true) && flasks[i].children[j].style.position == 'absolute') {
+                flasks[i].children[j].style.position = null;
+                
+            }
+        }
     }
 }
 
@@ -212,6 +224,7 @@ function flask_click(e) {
             setTimeout(function() {
                 e.children[0].style.position = null;
                 e.children[0].style.bottom = null;
+                position_fix();
             }, 600)
 
             // Обнуляем все значения и очищаем активный класс
@@ -308,7 +321,7 @@ function flask_add() {
     if (flask_add_num < flask_add_max) {
         flask_add_num += 1;
     } else {
-        flask_add_confirm = confirm(`По правилам игры, Вы можете добавить только ${flask_add_max} колбу, любите играть по правилам?`);
+        flask_add_confirm = confirm(`По правилам игры, Вы можете добавить только ${flask_add_max} колбу, любите играть по правилам? Нажмите отмена, чтобы добавить ещё одну колбу, либо ок чтобы не добавлять`);
     }
     if (flask_add_confirm != true) {
         let flask = document.createElement('div');

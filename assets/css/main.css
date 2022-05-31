@@ -5,7 +5,7 @@ body {
     position: relative;
     margin: 0;
     background-color: #141414;
-    background-image: url('/theballs/assets/img/logo.svg');
+    background-image: url('../../assets/img/logo.svg');
     background-repeat: repeat;
     background-size: 200px;
     animation: background_move 40s infinite alternate linear;
@@ -124,13 +124,19 @@ body {
     fill: #fff;
 }
 
-#g_body > .header > input {
+#g_body > #menu > input {
+    width: calc(100% - 32px);
+    margin: 25px 0 25px 0;
+}
+
+#g_body > .header > input,
+#g_body > #menu > input {
     height: 50px;
     padding: 0 15px 0 15px;
-    background-color: #ffffff;
+    background-color: #e6e6e6;
     color: #999999;
     overflow: hidden;
-    border: 1px solid #ffffff;
+    border: 1px solid #e6e6e6;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -143,11 +149,13 @@ body {
     -o-transition: all .3s ease-in-out;
 }
 
-#g_body > .header > input:hover {
+#g_body > .header > input:hover,
+#g_body > #menu > input:hover {
     border: 1px solid #999999;
 }
 
-#g_body > .header > input:focus-visible {
+#g_body > .header > input:focus-visible,
+#g_body > #menu > input:focus-visible {
     outline: none;
 }
 
@@ -234,8 +242,9 @@ body {
 /* Меню */
 #menu {
     display: none;
-    width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
+    width: calc(100% - 80px);
+    height: calc(var(--vh, 1vh) * 100 - 50px);
+    padding: 25px 40px;
     position: absolute;
     top: 0;
     left: 0;
@@ -244,7 +253,6 @@ body {
     background-color: #ffffff;
     z-index: 4;
 }
-
 #menu.open {
     display: block;
     animation: open .6s ease-in-out;
@@ -257,7 +265,7 @@ body {
     align-items: center;
     width: calc(100% - 10px);
     height: 50px;
-    margin: 5px;
+    margin: 0 5px 25px 5px;
 }
 
 #menu > .close > svg {
@@ -276,6 +284,12 @@ body {
     height: 50px;
     fill: #999999;
     cursor: pointer;
+}
+
+#menu > label {
+    color: #666666;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 400;
 }
 
 #menu > form {
@@ -324,9 +338,9 @@ body {
     justify-content: center;
     align-items: center;
     width: max-content;
-    width: 80%;
+    width: 100%;
     height: 50px;
-    margin: 25px 10% 25px 10%;
+    margin: 25px 0 25px 0;
     padding: 0 15px 0 15px;
     border: 0;
     background-color: #b3b3b3;
